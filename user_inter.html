@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Cleaning App</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='user_inter.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Upload Dataset</h2>
+
+    <!-- Upload Form -->
+    <form action="/upload" method="post" enctype="multipart/form-data" class="upload-form">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    <!-- Error Message -->
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <!-- Success Message -->
+    {% if success %}
+        <p class="success">{{ success }}</p>
+    {% endif %}
+
+    <!-- Data Preview -->
+    {% if tables %}
+        <h3>Data Preview</h3>
+
+        <div class="table-container">
+            {{ tables | safe }}
+        </div>
+
+        <!-- Graph Image (optional) -->
+        <!-- <div class="image-container">
+            <img src="{{ url_for('static', filename='graph.png') }}" alt="Graph" width="500">
+        </div> -->
+
+        <br>
+
+        <!-- Download Button -->
+        <a href="/download">
+            <button type="button">Download Cleaned File</button>
+        </a>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
